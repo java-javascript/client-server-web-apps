@@ -1,0 +1,9 @@
+{
+	"id": "todomvc",
+	"inputs": "js/app.js",
+	"paths": ["js/", "template/"],
+	"output-wrapper": "(function(){%output%})();",
+	"mode": "ADVANCED",
+	"level": "VERBOSE",
+	"output-file": "js/compiled.js"
+}
