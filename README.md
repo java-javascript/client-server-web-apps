@@ -13,3 +13,5 @@ These are small, proof-of-concept prototypes intended to demonstrate basic
 design, structure and operation using various languages, libraries and frameworks.  They
 are not full-fledged, bullet proof, enterprise grade applications.  These details are
 left as an exercise to the reader :).
+
+These are also very incomplete at the moment.  Just prefer code to be somewhere than on my local machine.

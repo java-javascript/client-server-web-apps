@@ -1,0 +1,41 @@
+mvn archetype:generate \
+-DarchetypeGroupId=org.jboss.spec.archetypes \
+-DarchetypeArtifactId=jboss-javaee6-ear-webapp \
+-DgroupId=com.saternos.jee \
+-DartifactId=backbonejs-rest \
+-Dversion=1.0-SNAPSHOT \
+-DinteractiveMode=false
+
+JBoss
+http://www.jboss.org/
+https://en.wikipedia.org/wiki/JBoss_application_server
+http://planet.jboss.org/post/jboss_as_7_1_0_final_thunder_released_java_ee_6_full_profile_certified
+
+https://www.jboss.org/jbossas/downloads/
+
+(downloaded 7.1.1)
+
+sudo mv jboss-as-7.1.1.Final /opt/local/
+cd /opt/local
+sudo ln -s /opt/local/jboss-as-7.1.1.Final jboss
+export PATH=$PATH:/opt/local/jboss/bin
+
+JBoss Executables
+add_user.sh				- Initial Setup
+	admin/password
+jboss-cli.sh			- jBoss Command Line Interface
+standalone.sh			- server 
+
+
+
+DEPLOYMENT
+mvn package (mvn clean install)
+cd target
+mvn jboss-as:deploy
+
+JBoss QuickStarts (JBoss and a WAR)
+http://localhost:8080/jboss-as-helloworld-html5/
+curl -d name=lm http://localhost:8080/jboss-as-helloworld-html5/hello/json/cas
+curl -d name=lm http://localhost:8080/jboss-as-helloworld-html5/hello/xml/cas
+
+
