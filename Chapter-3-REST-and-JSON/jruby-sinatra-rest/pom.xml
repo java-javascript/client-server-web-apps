@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.saternos</groupId>
+	<artifactId>jruby-rest-test</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>jruby-sinatra</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>org.jruby</groupId>
+			<artifactId>jruby-complete</artifactId>
+			<version>1.6.3</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+	<profiles>
+   <profile>  
+     <id>server</id>  
+     <build>  
+      <plugins>  
+       <plugin>  
+        <groupId>org.codehaus.mojo</groupId>  
+        <artifactId>exec-maven-plugin</artifactId>  
+        <version>1.2.1</version>  
+        <executions>  
+         <execution>  
+          <phase>test</phase>  
+          <goals>  
+           <goal>java</goal>  
+          </goals>  
+          			<configuration>
+							<executable>java</executable>
+							<mainClass>org.jruby.Main</mainClass>
+							<arguments>
+								<argument>-classpath</argument>
+								<classpath/>
+								<argument>org.jruby.Main</argument>
+								<argument>src/main/scripts/webapp.rb</argument>
+								<argument>-p 4579</argument>
+							</arguments>
+						</configuration>
+         </execution>  
+        </executions>  
+       </plugin>  
+      </plugins>  
+     </build>  
+    </profile>  
+   </profiles>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<executable>java</executable>
+					<mainClass>org.jruby.Main</mainClass>
+					<arguments>
+						<argument>-classpath</argument>
+						<classpath/>
+						<argument>org.jruby.Main</argument>
+						<argument>--version</argument>
+					</arguments>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>prepare-package</phase>
+					</execution>
+					<execution>
+						<id>gem-install-json</id>
+						<phase>package</phase>
+						<configuration>
+							<executable>java</executable>
+							<mainClass>org.jruby.Main</mainClass>
+							<arguments>
+								<argument>-classpath</argument>
+								<classpath/>
+								<argument>org.jruby.Main</argument>
+								<argument>-S</argument>
+								<argument>gem</argument>
+								<argument>install</argument>
+								<argument>--no-ri</argument>
+								<argument>--no-rdoc</argument>
+								<argument>-i</argument>
+								<argument>target/classes</argument>
+								<argument>json</argument>
+								<argument>--version</argument>
+								<argument>=1.6.3</argument>
+								<argument>--conservative</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					
+					<execution>
+						<id>gem-install-sinatra</id>
+						<phase>package</phase>
+						<configuration>
+							<executable>java</executable>
+							<mainClass>org.jruby.Main</mainClass>
+							<arguments>
+								<argument>-classpath</argument>
+								<classpath/>
+								<argument>org.jruby.Main</argument>
+								<argument>-S</argument>
+								<argument>gem</argument>
+								<argument>install</argument>
+								<argument>--no-ri</argument>
+								<argument>--no-rdoc</argument>
+								<argument>-i</argument>
+								<argument>target/classes</argument>
+								<argument>sinatra</argument>
+								<argument>--version</argument>
+								<argument>=1.3.1</argument>
+								<argument>--conservative</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
+<!--
+export GEM_HOME=/Users/cas/Desktop/jruby/gems
+export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=128m"
+
+http://www.ruby-forum.com/topic/991807
+http://blog.nicksieger.com/articles/2009/01/10/jruby-1-1-6-gems-in-a-jar
+https://github.com/owengriffin/maven-spring-jruby/blob/master/jruby-gems/pom.xml
+
+...Sinatra Starter Project
+https://github.com/vertis/sinatra-example
+
+-->
