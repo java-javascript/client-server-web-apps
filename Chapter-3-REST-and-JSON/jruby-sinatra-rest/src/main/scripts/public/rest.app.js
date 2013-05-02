@@ -25,7 +25,8 @@ $(document).ready(function() {
 		  url: myUrl,
 		  data: $('#request_body_data').val()
 		}).done(function( msg ) {
-			$("#results").append("<p>"+JSON.stringify(msg)+"</p>");
+			$("#results").text('');
+			$("#results").append(JSON.stringify(msg, null, "\t"));
 		}).error(function(msg){
 			console.log('ERROR:');
 			console.log(msg);

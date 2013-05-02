@@ -1,14 +1,23 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>testrest</title>
+		<title>Test Web API</title>
+		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 		<script src="rest.app.js"></script>
 	</head>
 	<body id="testrest" onload="">
-		<form action="testrest_submit" method="get" accept-charset="utf-8">
+		<div class="row">
+		  <div class="span2">
+		  	
+		  </div>
+		  <div class="span10">
+			<h1>Web API Test</h1>
+			<form action="testrest_submit" method="get" accept-charset="utf-8">
 			<label for="url">URL</label>
 			<input type="text" name="url" value="" id="url">
+			<label for="url">HTTP Verb</label>
 			<select name="verb" id="verb" onchange="" size="1">
 				<option value="GET">GET</option>
 				<option value="POST">POST</option>
@@ -17,11 +26,21 @@
 			</select>
 			<label for="request_body_data">Request Body Data (JSON)</label>
 			<input type="text" name="request_body_data" value='{"a": 1}' id="request_body_data">
-			
+
 			<label for="error_code">Error Code</label>
 			<input type="text" name="httpErrorCode" value="" id="error_code">
 			<p><button id='make_call'>Make Call</button></p>
 		</form>
-		<div id='results'></div>
+		</div>
+	</div>
+	<div class="row">
+	  <div class="span2">
+		
+	  </div>
+	  <div class="span10">
+		<pre id='results'></pre>	  	
+	  </div>
+	</div>
+
 	</body>	
 </html>
