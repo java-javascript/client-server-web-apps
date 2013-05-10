@@ -1,6 +1,6 @@
 [
-	{"uid":1, "title":"Bob"},
-	{"uid":2, "title":"John"},
-	{"uid":3, "title":"Jim"},
-	{"uid":4, "title":"Sally"}
+	{"uid":1, "title":"Computing Machinery and Intelligence", "author":"Alan Turing"},
+	{"uid":2, "title":"Artificial Intelligence: A Modern Approach", "author":"Stuart J. Russell and Peter Norvig"},
+	{"uid":3, "title":"Recursive functions of symbolic expressions and their computation by machine, part I", "author":"John McCarthy"},
+	{"uid":4, "title":"A relational model for large shared data banks", "author":"E. F. Codd"}
 ]
