@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.saternos.app</groupId>
+  <artifactId>main-webapp</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>main-webapp Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+	<dependency>
+	      <groupId>com.saternos.app</groupId>
+	      <artifactId>overlay-webapp</artifactId>
+	      <version>1.0-SNAPSHOT</version>
+	      <type>war</type>
+	      <scope>runtime</scope>
+	 </dependency>
+	 <dependency>
+		<groupId>org.jboss.resteasy</groupId>
+		<artifactId>resteasy-jaxrs</artifactId>
+		<version>2.2.1.GA</version>
+	 </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>main-webapp</finalName>
+	<plugins>
+	      <plugin>
+	        <groupId>org.mortbay.jetty</groupId>
+	        <artifactId>maven-jetty-plugin</artifactId>
+	        <configuration>
+				<contextPath>/</contextPath>
+	          	<webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
+	          	<webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+	<!--
+	          <jettyEnvXml>${basedir}/src/over/here/jetty-env.xml</jettyEnvXml>
+	          <classesDirectory>${basedir}/somewhere/else</classesDirectory>
+	          <scanTargets>
+	            <scanTarget>src/mydir</scanTarget>
+	            <scanTarget>src/myfile.txt</scanTarget>
+	          </scanTargets>
+	          <scanTargetPatterns>
+	            <scanTargetPattern>
+	              <directory>src/other-resources</directory>
+	              <includes>
+	                <include>**/*.xml</include>
+	                <include>**/*.properties</include>
+	              </includes>
+	              <excludes>
+	                <exclude>**/myspecial.xml</exclude>
+	                <exclude>**/myspecial.properties</exclude>
+	              </excludes>
+	            </scanTargetPattern>
+	          </scanTargetPatterns>
+	-->
+	        </configuration>
+	      </plugin>
+	  </plugins>
+
+  </build>
+
+</project>

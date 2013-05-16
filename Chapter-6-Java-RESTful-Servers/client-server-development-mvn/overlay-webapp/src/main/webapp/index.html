@@ -1,0 +1,66 @@
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>index - in overlay</title>
+</head>
+<body>
+	<h2>Hello from overlay!</h2>
+	<h3>JSON:  Calls in API</h3>
+	<select id='jsonSelect'>
+		<option value='widget'>Widget</option>
+		<option value='menu'>Menu</option>
+		<option value='glossary'>Glossary</option>				
+	</select>	
+	
+<!--	
+	<div id='sample'></div>
+-->	
+	<pre id='content'></pre>
+	
+	<!-- Locally Hosted-->
+	<script src='/js/underscore.js'></script>
+
+	<!-- CDN Hosted -->
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+	<script>
+		
+	var ajaxCall = function(entity){
+
+		var request = $.ajax({
+			  url: "/testapp/api/" + entity,
+			  type: "GET",
+			  dataType: "json"
+		});
+
+		request.done(function(msg) {
+			  $("#content").text( JSON.stringify(msg, null, 4));
+
+<!--
+			  if(entity==='widget'){
+				 $('#sample').text(msg['widget']['window']['title']);
+			  }else if (entity==='menu'){
+				 $('#sample').text(msg['menu']['value']);
+			  }else if (entity==='glossary'){
+				 $('#sample').text(msg['glossary']['title']);
+			  }
+-->			  
+			  window.latestRESTResult = msg;
+		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert( "Request failed: " + textStatus );
+		});
+	}
+		
+	$(document).ready(function() {
+		ajaxCall("widget");
+	});
+		
+	$(document).on('change','#jsonSelect', function(){
+		var tmp = $('option:selected', $(this)).val();
+		ajaxCall(tmp);
+	});
+		
+	</script>
+</body>	
+</html>
