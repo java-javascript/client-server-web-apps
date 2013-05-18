@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+/* 
+
+// Typically, repositories and dependencies are included.  Not required here.
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
+*/
+
+jettyRun.contextPath = '' 
