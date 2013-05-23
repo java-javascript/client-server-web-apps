@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="YahooFinance">
+	<head>
+	    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+		 <script src="http://code.angularjs.org/1.0.6/angular-resource.js"></script>
+		 <script>
+			angular.module('YahooFinance', ['ngResource']);
+
+			function YahooFinanceCtrl($scope, $resource) {
+		    	$scope.yahooAPI = $resource('http://finance.yahoo.com/webservice/v1/symbols/:sym/quote?format=json',
+		        {sym:'AAPL', callback:'JSON_CALLBACK'},
+		        {get:{method:'JSONP'}});
+
+		    	$scope.doSearch = function () {
+		        $scope.yahooAPIResponse = $scope.yahooAPI.get({sym:$scope.searchTerm});
+		    	};
+			}
+		 </script>
+	</head>
+<body>
+<div ng-controller="YahooFinanceCtrl">
+    <form class="form-horizontal">
+        <input type="text" ng-model="searchTerm">
+        <button class="btn" ng-click="doSearch()"><i class="icon-search"></i>Search</button>
+    </form>
+    <table class="table table-striped">
+        <tr ng-repeat="company in yahooAPIResponse.list.resources">
+            <td>{{compay.resource.fields.name}}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

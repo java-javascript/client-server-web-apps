@@ -1,0 +1,19 @@
+<!doctype html>
+<!-- Note use of XML attributes (directives). ng-app required to auto-bootrstrap an app.  One per HTML App, designates the root of the application (Can optionally include a module name). -->
+<html ng-app>
+<!-- 
+Based on the angular docs demo of the ng-app directive
+http://docs.angularjs.org/api/ng.directive:ngApp 
+This  only evaluates an expression - no controller or data binding.  
+-->
+  <head>
+	<!-- Load the angular library - note the other angular scripts that might be used -->
+	<script src="http://code.angularjs.org/1.0.6/angular.min.js"></script>
+	</head>
+  <body>
+	 <!-- http://docs-angularjs-org-dev.appspot.com/guide/expression
+	Expressions are JavaScript-like code snippets that are usually placed in bindings  -->
+    Angular Expression 1 + 2 evaluates to:  {{ 1 + 2 }}
+  </body>
+</html>
+
