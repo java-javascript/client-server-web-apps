@@ -1,4 +1,3 @@
-
 // Animal is the top of the object hierarchy
 function Animal() {}
 
