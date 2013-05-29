@@ -1,33 +1,36 @@
 <!doctype html>
-<html ng-app="YahooFinance">
+<html ng-app="GoogleFinance">
 	<head>
 	    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
 		 <script src="http://code.angularjs.org/1.0.6/angular-resource.js"></script>
 		 <script>
-			angular.module('YahooFinance', ['ngResource']);
+			angular.module('GoogleFinance', ['ngResource']);
 
-			function YahooFinanceCtrl($scope, $resource) {
-		    	$scope.yahooAPI = $resource('http://finance.yahoo.com/webservice/v1/symbols/:sym/quote?format=json',
-		        {sym:'AAPL', callback:'JSON_CALLBACK'},
-		        {get:{method:'JSONP'}});
+			function AppCtrl($scope, $resource) {
+				$scope.googleFinance = $resource('https://finance.google.com/finance/info', 
+			                                     {client:'ig', q: 'AAPL', callback:'JSON_CALLBACK'},
+			                                     {get: {method:'JSONP', isArray: true}});
 
-		    	$scope.doSearch = function () {
-		        $scope.yahooAPIResponse = $scope.yahooAPI.get({sym:$scope.searchTerm});
+			    $scope.indexResult = $scope.googleFinance.get();
+			
+				$scope.doSearch = function () {
+					console.log($scope.searchTerm)
+		        	$scope.indexResult = $scope.googleFinance.get({q: $scope.searchTerm});
 		    	};
 			}
+	
 		 </script>
 	</head>
 <body>
-<div ng-controller="YahooFinanceCtrl">
-    <form class="form-horizontal">
-        <input type="text" ng-model="searchTerm">
-        <button class="btn" ng-click="doSearch()"><i class="icon-search"></i>Search</button>
-    </form>
-    <table class="table table-striped">
-        <tr ng-repeat="company in yahooAPIResponse.list.resources">
-            <td>{{compay.resource.fields.name}}</td>
-        </tr>
-    </table>
-</div>
+
+    <div ng-controller="AppCtrl">
+	 <form class="form-horizontal">
+	        <input type="text" ng-model="searchTerm">
+	        <button class="btn" ng-click="doSearch()"><i class="icon-search"></i>Search</button>
+	    </form>
+		Current Price: {{indexResult[0].l_cur}}<br/>
+		Change:        {{indexResult[0].c}}<br/>
+	</div>
+
 </body>
 </html>
