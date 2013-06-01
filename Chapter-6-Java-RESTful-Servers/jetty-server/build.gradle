@@ -1,0 +1,10 @@
+apply plugin:'java' 
+
+repositories{mavenCentral()}
+dependencies{compile 'org.eclipse.jetty:jetty-server:8.1.0.RC5'}
+
+task(startServer, dependsOn: 'classes', type: JavaExec) {
+    main = 'com.saternos.embedded.TestJettyHttpServer'
+    classpath = sourceSets.main.runtimeClasspath
+    args 8000
+}
