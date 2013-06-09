@@ -6,6 +6,7 @@ Project: Hello world on each server using curl or simple web page to view result
 Demonstrates java "containerless"" web applications
 - pure java
 - jetty
+- netty
 - play 
 
 
