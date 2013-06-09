@@ -1,0 +1,10 @@
+apply plugin:'java' 
+
+repositories{mavenCentral()}
+dependencies{compile 'io.netty:netty:4.0.0.Alpha8'}
+
+task(startServer, dependsOn: 'classes', type: JavaExec) {
+    main = 'com.saternos.embedded.TestNettyHttpServer'
+    classpath = sourceSets.main.runtimeClasspath
+    args 8000
+}
