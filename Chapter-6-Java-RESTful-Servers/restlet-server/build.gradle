@@ -1,0 +1,17 @@
+apply plugin:'java' 
+
+repositories{
+	mavenCentral(); 
+    maven {
+ 		url "http://maven.restlet.org" 
+    }
+}
+
+ 
+dependencies{compile 'org.restlet.jse:org.restlet:2.0.0'; compile 'org.restlet.jse:org.restlet.ext.json:2.0.0';}
+
+task(startServer, dependsOn: 'classes', type: JavaExec) {
+    main = 'com.saternos.embedded.TestRestletHttpServer'
+    classpath = sourceSets.main.runtimeClasspath
+    args 8000
+}
