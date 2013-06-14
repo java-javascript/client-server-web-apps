@@ -12,9 +12,10 @@ public class TestNettyHttpServer {
         
 		bootstrap.group(new NioEventLoopGroup(), new NioEventLoopGroup())
 				.channel(NioServerSocketChannel.class)
-				.localAddress(8000)
+				.localAddress(Integer.parseInt(args[0]))
 				.childHandler(new JsonServerInitializer());
-				
+		
+		System.out.println("Starting server on port: " + args[0]);			
         bootstrap.bind().sync().channel().closeFuture().sync();
     }
 }
