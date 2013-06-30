@@ -1,0 +1,20 @@
+project com.saternos.bookshop
+
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+
+entity jpa --class ~.domain.Author --testAutomatically
+field string --fieldName name --sizeMin 2 --notNull
+
+entity jpa --class ~.domain.Book --testAutomatically
+field string --fieldName name --notNull --sizeMin 2
+field number --fieldName price --type java.math.BigDecimal
+field set --fieldName authors --type ~.domain.Author
+
+json all --deepSerialize
+web mvc json setup
+web mvc json all
+
+web mvc setup
+web mvc all --package ~.web
+
+// http://localhost:8080/bookshop/

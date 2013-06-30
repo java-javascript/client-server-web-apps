@@ -1,0 +1,17 @@
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-06-29 11:50:07
+project com.saternos.bookshop
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+entity jpa --class ~.domain.Author --testAutomatically
+field string --fieldName name --sizeMin 2 --notNull
+entity jpa --class ~.domain.Book --testAutomatically
+field string --fieldName name --notNull --sizeMin 2
+field number --fieldName price --type java.math.BigDecimal
+field set --fieldName authors --type ~.domain.Author
+json all --deepSerialize
+web mvc json setup
+web mvc json all
+web mvc setup
+web mvc all --package ~.web
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-06-29 18:42:42
+exit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-06-29 18:58:28

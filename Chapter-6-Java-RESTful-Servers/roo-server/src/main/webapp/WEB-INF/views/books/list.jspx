@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_saternos_bookshop_domain_Book" items="${books}" z="3m8Dk9mKVRoP1LMDZu+PBhsy980=">
+        <table:table data="${books}" id="l_com_saternos_bookshop_domain_Book" path="/books" z="Fu9eVRj2/KCj5ZXT90h+7OAYRg0=">
+            <table:column id="c_com_saternos_bookshop_domain_Book_name" property="name" z="515ABWTi1ISGeyYEaeaN1Oat81c="/>
+            <table:column id="c_com_saternos_bookshop_domain_Book_price" property="price" z="zYNjuzrQBi8vGVckhWmhp7M8D7Y="/>
+            <table:column id="c_com_saternos_bookshop_domain_Book_authors" property="authors" z="CNzW977MGQwkowWheaeoMVn9mQ4="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,45 @@
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Book List</title>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		
+		<div class="row">
+	        <div class="span4">
+				<h3>Authors</h3>
+				<ul class='authorlist'></ul>
+			</div>
+		</div>
+		
+	    <div class="row">
+	        <div class="span4">
+				<h3>Books</h3>
+				<ul class='booklist'></ul>
+			</div>
+		</div>
+	</div>		
+	
+	<script>
+	(function() {
+		$.getJSON('/bookshop/books', function(books) {
+	  		$.each(books, function(nil,book) {
+	    		$('.booklist').append('<li>' + book['name'] + '</li>');
+	  		});
+		});
+		
+		$.getJSON('/bookshop/authors', function(authors) {
+	  		$.each(authors, function(nil,author) {
+	    		$('.authorlist').append('<li>' + author['name'] + '</li>');
+	  		});
+		});
+		
+	})();	
+
+	</script>
+</body>
+</html>

@@ -5,7 +5,7 @@ import org.restlet.data.*;
 import org.restlet.resource.*;
 import org.restlet.ext.json.JsonConverter;
 
-public class TestRestletHttpServer extends ServerResource {
+public class TestRestletHttpServer extends 	 {
 
 	public static void main(String[] args) throws Exception {  
 	    Component component = new Component();  
