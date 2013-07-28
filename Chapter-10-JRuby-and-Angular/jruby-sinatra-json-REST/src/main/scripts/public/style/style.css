@@ -1,0 +1,23 @@
+.symbol{
+	width: 45px;
+	margin-top: 9px;
+}
+
+.price{
+	width: 45px; 
+	disabled:true;
+	margin-top: 9px;
+}
+
+.desc{
+	width: 75px;
+}
+
+.buttons{
+	width: 175px;
+}
+
+th{
+	text-align: left;
+}
+
