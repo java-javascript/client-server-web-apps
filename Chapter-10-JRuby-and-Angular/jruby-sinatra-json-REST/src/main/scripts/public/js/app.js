@@ -4,9 +4,12 @@ function StockPortfolioCtrl($scope, $http){
 
 	// Get
 	$http.get('/stocks', { "data" : ""}).
-	        success(function(data, status) {$scope.status = status; $scope.stocks = data;}).
+	        success(function(data, status) {
+				$scope.status = status; 
+				$scope.stocks = data;	
+			}).
 			error(  function(data, status) {$scope.status = status;});
-    
+
 	// Delete
 	$scope.deleteStock =  function(t, index){
 	
@@ -33,6 +36,8 @@ function StockPortfolioCtrl($scope, $http){
 					window.myData = data;
 					$scope.name = data[0].name;
 					$scope.l_cur = data[0].l_cur;
+					$scope.hi52 = data[0].hi52;
+					$scope.lo52 = data[0].lo52;										
 					validSymbol = true;
 		    		}).
 		    	error(function(data, status, headers, config) {
@@ -58,23 +63,31 @@ function StockPortfolioCtrl($scope, $http){
         $scope.t = '';
         $scope.name = '';
 		$scope.l_cur = '';
-
+		$scope.hi52 = '';
+		$scope.lo52 = '';			
+		
         $scope.addFormIsVisible = false; 	        
     };
-
+	
 	$scope.saveStock = function() {
 		    var rec = {
 	        "created_at": new Date(),
 	        "t": $scope.t,
 	        "name": $scope.name,
-	        "l_cur": $scope.l_cur}
+	        "l_cur": $scope.l_cur,
+	        "lo52": $scope.lo52,	
+			"hi52": $scope.hi52
+			}
 	
 			if (validSymbol===true){
 	
 	        	$scope.stocks.push(rec);
 
 				$http.put('/stock/' + $scope.t, {"data" : rec}).
-	        		success(function(data, status) {$scope.status = status;}).
+	        		success(function(data, status) {
+						$scope.status = status;
+						$scope.drawChart(rec.t, rec.hi52, rec.lo52, rec.l_cur);
+						}).
 					error(  function(data, status) {alert(data);$scope.status = status;});
 
 	         	$scope.hideAddForm();
@@ -82,11 +95,13 @@ function StockPortfolioCtrl($scope, $http){
 				$scope.t = '';
 		        $scope.name = '';
 				$scope.l_cur = '';
+				$scope.hi52 = "";
+				$scope.lo52 = "";								
 			}
 	    };
 
 	// Order
     $scope.orderProp = 't';	
-    $scope.orderBy = function(col) {$scope.orderProp = col;}	
+    $scope.orderBy = function(col) {$scope.orderProp = col;}
 
 }

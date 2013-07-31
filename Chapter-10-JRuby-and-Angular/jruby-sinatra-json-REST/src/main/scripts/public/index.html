@@ -14,7 +14,7 @@
 </head>
 <body>
 	
-  <div class="container" ng-app ng-controller="StockPortfolioCtrl">
+  <div class="container" ng-controller="StockPortfolioCtrl">
 
 	<div class="row">
 		<div class="row">
@@ -22,8 +22,7 @@
 		</div>
 		
 		<div class="span10">
-			Filter: <input ng-model="query" class='small'>
-			<br/><br/>
+			Filter: <input ng-model="query" class='small'><br/><br/>
 
 	<table class="table-condensed table-hover zebra-striped bordered-table">
 		<thead>
@@ -31,6 +30,8 @@
 	        	<th ng-click="orderBy('t')">Symbol</th>
 	        	<th ng-click="orderBy('name')">Description</th>
 	        	<th ng-click="orderBy('l_cur')">Price</th>
+	        	<th ng-click="orderBy('lo52')">52 Week Low</th>
+	        	<th ng-click="orderBy('hi52')">52 Week High</th>	
 				<th><a ng-click="showAddForm()" class="btn small">Add Stock</a></th>
 	    	</tr>
 		</thead>
@@ -46,22 +47,26 @@
 				<td>
 		        	<input type="text" ng-model="l_cur" class='price' readonly placeholder="Price">
 		      	</td>
+				<td>&nbsp;</td>					
 		      	<td>
 					<a ng-click="saveStock()" class="btn btn-primary save-button">Save</a>        
 		        	<a ng-click="hideAddForm()" class="btn">Cancel</a>
 		      	</td>
 		    </tr>
 	    	<tr ng-repeat="stock in stocks | filter:query | orderBy:orderProp">
-	        	<td>{{stock.t}}</td>
+	        	<td>
+					<a href='https://www.google.com/finance?q={{stock.e}}%3A{{stock.t}}'>{{stock.t}}</a>
+				</td>
 	        	<td>{{stock.name}}</td>
-	        	<td>{{stock.l_cur}}</td>
+	        	<td style='text-align: right'>{{stock.l_cur}}</td>
+	        	<td style='text-align: right'>{{stock.lo52}}</td>	
+	        	<td style='text-align: right'>{{stock.hi52}}</td>	
 				<td class='buttons'>
 					<button class='btn small danger' ng-click="deleteStock(stock.t,$index)">x</button>
-				</td>
+				</td>	
 	    	</tr>
 		</tbody>
 	</table>
-	
   </div>                    
 </body>
 </html>
