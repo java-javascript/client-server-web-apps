@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- Angular: Model, Controllers, Resource, ng-click -->
+<html ng-app="app"><!-- naming an angular application -->
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>angular2</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script><!-- res -->
+	
+	<script>
+	angular.module('app', ['ngResource']); // including resource in an angular app
+
+	function AppCtrl($scope, $resource) {  // Controller function controller, 
+
+		$scope.lookup = function(){
+			
+			$scope.result  = $resource('https://finance.google.com/finance/info', 
+		                                     {
+												client:'ig', 
+												callback:'JSON_CALLBACK'},
+		                                     	{
+													get: {
+														method:'JSONP', 
+														params:{q: $scope.stockSymbol}, 
+														isArray: true
+													}
+												}
+										).get();
+		}
+
+	}
+
+	</script>
+</head>
+<body>
+	<div ng-controller="AppCtrl">
+		<input type="text" ng-model="stockSymbol" />
+		<pre>{{result[0]}}</pre>
+		<button ng-click='lookup()'>Lookup</button>	
+	</div>
+</body>
+</html>

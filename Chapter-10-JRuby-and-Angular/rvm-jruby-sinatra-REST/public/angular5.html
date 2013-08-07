@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- 
+Stylings - from this point, either extract or migrate to "starter project"
+-->
+<html lang="en" ng-app="app">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>angular5</title>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">	
+	<style type="text/css" media="screen">
+		button{
+			vertical-align: top;
+			text-align: right;
+		}
+		td {
+			width: 150px; 
+			white-space: nowrap
+		}
+		th {
+			width: 150px; 
+			text-align: left;
+		}
+		.money{
+			width: 45px; 
+			margin-top: 9px;
+			text-align: right;
+		}
+
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
+	<script>
+	angular.module('app', ['ngResource']);
+	function StockPortfolioCtrl($scope, $http, $resource){
+
+		$scope.stocks=[];
+		
+		$http.get('/stocks').
+			success(function(data) {
+				$scope.stocks = data;
+			}).
+			error(  function(data, status) {
+				$scope.status = status;
+			});
+		
+		
+	    $scope.orderProp = 't';	
+
+	    $scope.orderBy = function(col) {
+			$scope.orderProp = col;
+		}
+
+		$scope.lookup = function(){
+			
+			$scope.financeResult  = $resource('http://www.google.com/finance/info?callback=JSON_CALLBACK&', 
+		                                     {
+												client:'ig', 
+												callback:'JSON_CALLBACK'},
+		                                     	{
+													get: {
+														method:'JSONP', 
+														params:{q: $scope.stockSymbol, infotype:'infoquoteall'}, 
+														isArray: true														
+													}
+												}
+										);
+			$scope.$parent.result = $scope.financeResult.get();							
+		}
+
+		$scope.updateTable = function(){
+			if ($scope.$parent.result === undefined ||
+				$scope.stocks.indexOf($scope.$parent.result[0]) !== -1){
+				console.log('Stock exists in portfolio.');
+			}else{
+				console.log($scope.stocks.indexOf($scope.$parent.result[0]));
+				if ($scope.$parent.result[0]===undefined){
+					console.log('Stock invalid.');
+				}else{
+					var stock = $scope.$parent.result[0];
+					stock.l_cur = parseFloat(stock.l_cur);
+					stock.lo52 = parseFloat(stock.lo52);
+					stock.hi52 = parseFloat(stock.hi52);
+					$scope.saveStock(stock);			
+				}
+			}	
+			
+		}
+
+		$scope.deleteStock =  function(stock){
+			if (confirm('Delete '+stock.t+'?')){
+				$scope.stocks.splice($scope.stocks.indexOf(stock), 1);
+				
+				// REST call to delete the record
+				$http.delete('/stock/' + stock.t).
+		        	success(function(data, status) {
+						$scope.status = status;
+					}).
+					error(  function(data, status) {
+						$scope.status = status;
+					});		
+			}
+		}
+		
+		$scope.saveStock = function(stock) {
+			    stock.created_at = new Date();
+		        $scope.stocks.push(stock);
+				console.log(stock)
+				$http.put('/stock/' + $scope.t, {"data" : stock}).
+					success(function(data, status) {
+						$scope.status = status;
+					}).
+					error(  function(data, status) {
+						alert(data);$scope.status = status;
+					});
+		};
+	}
+	</script>	
+
+</head>
+<body>
+	<div class="row">
+		<div class="span12">&nbsp;</div>
+	</div>	
+	<div class="row">
+	    <div class="span2">
+		</div>
+		<div class="span10">	
+  <div ng-controller="StockPortfolioCtrl">
+
+		<input type="text" ng-model="stockSymbol" />
+		<button ng-click='lookup()'>Lookup</button>{{result[0].name}} {{result[0].l_cur}}
+		
+		<br/>	
+		<input ng-model="query" class='small'> (Filter)<br/><br/>
+		<button ng-click='updateTable()'>Add to Portfolio</button>
+	<table>
+		<thead>
+			<tr>
+	        	<th ng-click="orderBy('t')">Symbol</th>
+	        	<th ng-click="orderBy('name')">Description</th>
+	        	<th ng-click="orderBy('l_cur')" class="money">Price</th>
+	        	<th ng-click="orderBy('lo52')" class="money">52 Week Low</th>
+	        	<th ng-click="orderBy('hi52')" class="money">52 Week High</th>	
+	    	</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="stock in stocks | filter:query | orderBy:orderProp ">
+	        	<td>
+					<a href='https://www.google.com/finance?q={{stock.e}}%3A{{stock.t}}'>{{stock.t}}</a>
+				</td>
+	        	<td>{{stock.name}}</td>
+	        	<td style='text-align: right'>{{stock.l_cur.toFixed(2)}}</td>
+	        	<td style='text-align: right'>{{stock.lo52.toFixed(2)}}</td>	
+	        	<td style='text-align: right'>{{stock.hi52.toFixed(2)}}</td>	
+				<td class='buttons'>
+					<button ng-click="deleteStock(stock)">x</button>
+				</td>	
+	    	</tr>
+		</tbody>
+	</table>
+  </div>  
+     		</div>
+		</div>
+</body>
+</html>
