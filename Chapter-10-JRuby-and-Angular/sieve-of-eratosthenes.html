@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app='sieve'>
+<head>
+	<title>Sieve of Eratosthenes</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script> 
+	<script src='http://underscorejs.org/underscore-min.js'></script>
+	<script>
+		angular.module('sieve', []);
+		var n = 100 + 1;
+		
+		function MainCtrl($scope) {
+		  	$scope.arr = _.range(2,n);
+			$scope.color={}
+			
+			_.each($scope.arr, function(i){$scope.color[i]='#eeeeee';});
+
+			$scope.mark = function(i, bgColor){
+				for (var j = i * i; j < n; j += i) {
+	            	$scope.color[j] = bgColor;
+	            }
+			}
+
+		    $scope.markAll = function() {
+				_.each(_.range(2, Math.sqrt(n)), function(i){						
+						if ($scope.arr[i])
+							$scope.mark(i, 'red');
+						}
+		    	);
+			}
+
+			$scope.liClicked = function(i){
+				var m = (i*i*i)+10 * 12;
+				if (!(i > 3 && (i >= Math.sqrt(n) || i % 2 === 0 || i % 3 === 0)))
+					$scope.mark(i, '#'+m+m);
+			}
+		}
+	</script>
+	
+	<style type="text/css" media="screen">
+		ul { width: 300px; list-style: none; line-height: normal; }
+		li { width: 25px;  float: left;  border: 1px black solid; }
+	</style>
+
+</head>
+<body ng-controller="MainCtrl">
+	<h3><a href='http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes'>Sieve of Eratosthenes</a></h3>
+	<p>Click on prime numbers less than 10 to see the associated composites eliminated progressively, 
+		or mark all to mark all non-primes at once.</p>
+	<button ng-click="markAll()">Mark All</button>
+	<ul>
+		<li ng-repeat="i in arr" ng-style="{'background-color': color[i]}" ng-click='liClicked(i)'>
+			{{i}}
+		</li>
+	</ul>        
+</body>
+</html>
