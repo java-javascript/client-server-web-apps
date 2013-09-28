@@ -1,0 +1,51 @@
+<html><head></head>
+    <body>
+      <h3>Response</h3>
+      <textarea id='response' rows='10' cols='40'></textarea>
+      <br/><button id='noheader'>No Header</button>
+      <br/><button id='json'>JSON</button>
+      <br/><button id='jsonp'>JSONP</button>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      $(function() {
+  		
+		$('#noheader').on('click', function(){
+			$.get('/api/greeting',
+				  function(data){
+					var greeting = $('greeting',data).attr('text');
+					 $('#response').val(greeting);
+				  });
+
+		});
+		
+  		$('#json').on('click', function(){    
+			$.getJSON('/api/greeting',
+				function(data){
+					$('#response').val(JSON.stringify(data));
+				});
+		});
+
+
+        $('#jsonp').on('click', function(){
+           
+                 var url = 'http://localhost:8080/api/greeting/remote';
+                   
+                 // Guarantee a cross origin request
+                 if (location.hostname==='localhost'){
+                         url = url.replace('localhost', "127.0.0.1");  
+                 }
+                  
+				// http://bugs.jquery.com/ticket/7694 - can't rely on headers
+ 
+                 $.ajax({url:     url,
+					    dataType: 'jsonp',
+						jsonp:'__callback',
+                    	success: function(data){
+							$('#response').val("JSONP (to " + url +"):"+JSON.stringify(data));
+						}
+				});
+         });
+      });
+    </script>  
+  </body>
+</html>
