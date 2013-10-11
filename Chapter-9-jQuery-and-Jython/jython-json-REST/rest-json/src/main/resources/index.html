@@ -11,29 +11,25 @@
 	
 	$.getJSON("/api/groups.json", 
 		function(data) {
-			//TODO:  mention functional programming and the underscore.js library
 			$.each(data, function(i,item){$("<option>"+item.name+"</option>").appendTo("#selected_group");});
 		}).error(function(){ console.log("error"); 
 	});
 
-	// TODO: Talk about binding events outside of markup - http://en.wikipedia.org/wiki/Unobtrusive_JavaScript
 	$(document).ready(function() {
 		$('#selected_group').bind('change', function (){getGroup();});
 	});
 		
   	function getGroup(){
 		$("#images").empty();
-		// TODO:  Talk about JSONP calls to remote servers
-		// TODO:  Talk about the need for templates 
 		$.getJSON("https://api.github.com/orgs/"+$('#selected_group').val()+"/members", 
 			function(data) {
 				$.each(data, function(i,item){
-					$("<span>" + item.login+"</span><img/>").attr("src", item.avatar_url).appendTo("#images");
+	              $("<span>" + item.login+"</span><img/>").
+	                 attr("src", item.avatar_url).appendTo("#images");
 			});
 		})
 		.error(function(){ console.log("error"); });
 	}
-	
 	</script>
 </head>
 <body>
