@@ -10,7 +10,7 @@ public class Server
     public static void main( String[] args ) throws IOException
     {
 		new PythonInterpreter().exec(
-			x`FileUtils.readFileToString(new File("python/http_server.py"))
+			FileUtils.readFileToString(new File("python/http_server.py"))
 		);
     }
 }
