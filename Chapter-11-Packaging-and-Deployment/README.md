@@ -1,4 +1,4 @@
-Chapter 11 Jersey and Jetty
+Chapter 11 Packaging and Deployment
 ===========================
 
-Project: Jersey/Jetty/jQuery/maven (personal library of books)
+Project: Jersey/Jetty/JBoss/jQuery/maven (personal library of books)

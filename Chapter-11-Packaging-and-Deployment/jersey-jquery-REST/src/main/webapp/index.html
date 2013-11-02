@@ -1,0 +1,80 @@
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>index</title>
+	<!-- 
+	TODO:  Discuss Content Deliver Networks
+	https://developers.google.com/speed/libraries/devguide
+	http://www.bootstrapcdn.com/
+	http://cdnjs.com/
+	http://netdna.bootstrapcdn.com
+	-->
+	
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />	
+
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript" charset="utf-8">
+
+	// TODO:  Global Scope
+	var list = function(){
+		
+		$('.list-items').remove();
+		
+		// TODO:  jQuery Methods getJSON and ajax
+		$.getJSON('/jersey-server/api/books', function(data) {
+		  $.each(data, 
+			function(key, val) {
+				$('<div class="list-items">' + 
+				' <a href="#" class="delete" id="'+key+'">x</a> '+ val +'</div>').appendTo(".listing");
+			});
+		});
+	}
+	
+	// TODO: Document Ready	
+	$(document).ready(function () {
+
+		list();  // Show list when page loads
+		
+		// TODO:  Selectors - . for css, # for id
+		$('.add').on('click', function(e) {
+			
+			    // TODO: Discuss URL parameters, async, callbacks
+				$.ajax({
+			  		type: "PUT",
+			  		url: "/jersey-server/api/books/" + new Date().getTime() + "?title=" + $('#title').val(),
+			  		async: false
+				}); 			
+				list();
+		});	
+	});
+	
+	// TODO: Discuss why this needs to be set up this way so that subsequent events are bound.
+	$(document).on("click", '.delete', function(event){
+		
+		    // TODO: Discuss URL parameters, async, callbacks
+			$.ajax({
+		  		type: "DELETE",
+		  		url: "/jersey-server/api/books/" + $(this).attr("id"),
+		  		async: false
+			}); 
+			list();
+	});
+	
+	</script>
+		
+</head>
+<body>
+	<!-- Note: inline style is terribly un-bootstrappy.  -->
+	<div style='text-align: center;'>
+	<h1>Book List</h1>
+	<h2>JavaScript:  JQuery</h2>
+	<p>DOM Manipulation.  No MV*.</p>
+	<label for="title"></label><input type="text" name="title" id="title">
+	 
+	<a class="add" href="#">Add</a>
+	<p class="listing"></p>	
+	</div>
+</body>
+</html>	

@@ -19,7 +19,7 @@ public class GreetingResource {
     @GET
 	@Produces({"application/x-javascript"})
     @JSONP(queryParam = JSONP.DEFAULT_QUERY)
-    public GreetingBean getGreeting(@QueryParam(JSONP.DEFAULT_QUERY) String callback) {
+    public GreetingBean 	 {
         return new GreetingBean("Hello World Remote");
     }
 }

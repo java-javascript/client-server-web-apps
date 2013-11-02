@@ -11,6 +11,8 @@
 	-->
 	
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />	
+
+
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script type="text/javascript" charset="utf-8">
@@ -21,7 +23,7 @@
 		$('.list-items').remove();
 		
 		// TODO:  jQuery Methods getJSON and ajax
-		$.getJSON('/jetty-server/api/books', function(data) {
+		$.getJSON('/jersey-server/api/books', function(data) {
 		  $.each(data, 
 			function(key, val) {
 				$('<div class="list-items">' + 
@@ -41,7 +43,7 @@
 			    // TODO: Discuss URL parameters, async, callbacks
 				$.ajax({
 			  		type: "PUT",
-			  		url: "/jetty-server/api/books/" + new Date().getTime() + "?title=" + $('#title').val(),
+			  		url: "/jersey-server/api/books/" + new Date().getTime() + "?title=" + $('#title').val(),
 			  		async: false
 				}); 			
 				list();
@@ -54,7 +56,7 @@
 		    // TODO: Discuss URL parameters, async, callbacks
 			$.ajax({
 		  		type: "DELETE",
-		  		url: "/jetty-server/api/books/" + $(this).attr("id"),
+		  		url: "/jersey-server/api/books/" + $(this).attr("id"),
 		  		async: false
 			}); 
 			list();
@@ -64,6 +66,8 @@
 		
 </head>
 <body>
+	<!-- Note: inline style is terribly un-bootstrappy.  -->
+	<div style='text-align: center;'>
 	<h1>Book List</h1>
 	<h2>JavaScript:  JQuery</h2>
 	<p>DOM Manipulation.  No MV*.</p>
@@ -71,5 +75,6 @@
 	 
 	<a class="add" href="#">Add</a>
 	<p class="listing"></p>	
+	</div>
 </body>
 </html>	

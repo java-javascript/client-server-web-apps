@@ -7,7 +7,8 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
 	<script>
 	angular.module('app', ['ngResource']);
-	function StockPortfolioCtrl($scope, $http, $resource){
+	
+	function StockPortfolioCtrl($scope, $resource){
 
 		$scope.stocks=[];
 	    $scope.orderProp = 't';	

@@ -1,0 +1,30 @@
+=== Development Process
+
+mvn archetype:generate
+
+239: remote -> org.apache.maven.archetypes:maven-archetype-quickstart (An archetype which contains a sample Maven project.)
+
+QuickStarver Version 1.0
+
+Define value for property 'groupId': : com.oreilly.jython-server
+Define value for property 'artifactId': : rest-json
+Define value for property 'version': 1.0-SNAPSHOT: 
+Define value for property 'package': com.oreilly.jython-server:
+
+JavaScript CLI - the JavaScript Console in the browser (mention server-side CLI will be introduced later)
+
+
+=== JQuery Client (index.html)
+
+TODOs from index.html
+// functional programming and the underscore.js library
+// binding events outside of markup - http://en.wikipedia.org/wiki/Unobtrusive_JavaScript
+// JSONP calls to remote servers
+
+==== Underscore
+
+==== Local Storage
+
+
+
+These anticipate innovations MV*, Templates, unobtrusive JavaScript.

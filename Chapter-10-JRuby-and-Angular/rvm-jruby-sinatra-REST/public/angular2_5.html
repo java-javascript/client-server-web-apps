@@ -2,7 +2,7 @@
 <html ng-app="app">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>angular2</title>
+	<title>angular2.5</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
 	<script>
@@ -34,8 +34,8 @@
 <body>
 	<div ng-controller="AppCtrl">
 		<input type="text" ng-model="stockSymbol" />
-		<pre>{{result[0]}}</pre>
 		<button ng-click='lookup()'>Lookup</button>	
+{{result[0].t}} {{result[0].l_cur}}		
 	</div>
 </body>
 </html>

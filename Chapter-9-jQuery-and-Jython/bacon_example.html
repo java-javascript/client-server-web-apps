@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Bacon.js Example</title>
+</head>
+<body align='center'>
+	<h1><div id='sum'></div></h1>
+	
+	<button id='minus10'>-10</button>
+	<button id='minus'>-1</button>	
+	<button id='plus'>+1</button>
+	<button id='plus10'>+10</button>
+
+	<p><a href='https://github.com/baconjs/bacon.js'>https://github.com/baconjs/bacon.js</a></p>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.6.10/Bacon.min.js'></script>
+	<script type="text/javascript" charset="utf-8">
+	
+		var plus, minus, plus10, minus10, all, counter;
+	
+		plus = $("#plus").asEventStream("click").map(1);
+		minus = $("#minus").asEventStream("click").map(-1);
+		plus10 = $("#plus10").asEventStream("click").map(10);
+		minus10 = $("#minus10").asEventStream("click").map(-10);
+	
+		// Merge the event streams
+		all = plus.merge(minus).merge(plus10).merge(minus10);
+
+		//Scan: change an event stream to a "property"
+		counter = all.scan(0, function(x, y) { 
+								return x + y;
+						   }); 
+	
+		counter.onValue(function(sum) { 
+						$("#sum").text(sum); 
+					});
+
+	</script>
+
+</body>
+</html>

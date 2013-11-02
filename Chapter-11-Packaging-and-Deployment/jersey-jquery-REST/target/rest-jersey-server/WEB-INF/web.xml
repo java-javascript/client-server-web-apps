@@ -5,12 +5,29 @@
 <web-app>
    <display-name>Jersey Web Application</display-name>
   
+<!-- 
+Prevent RestEasy from scanning and finding a conflicting JAX-RS implementation
+http://stackoverflow.com/questions/6953516/deploying-a-jersey-webapp-on-jboss-as-7
+ -->
+<context-param>
+    <param-name>resteasy.scan</param-name>
+    <param-value>false</param-value>
+</context-param>
+<context-param>
+    <param-name>resteasy.scan.providers</param-name>
+    <param-value>false</param-value>
+</context-param>
+<context-param>
+    <param-name>resteasy.scan.resources</param-name>
+    <param-value>false</param-value>
+</context-param>
+
    <servlet>
       <servlet-name>Jersey Web Application</servlet-name>
       <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
       <init-param>
          <param-name>com.sun.jersey.config.property.packages</param-name>         
-         <param-value>com.oreilly.jetty.restservices</param-value>
+         <param-value>com.oreilly.jersey.restservices</param-value>
       </init-param>
       <load-on-startup>1</load-on-startup>
    </servlet>

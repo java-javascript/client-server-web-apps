@@ -1,0 +1,9 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+# gem "rails"
+
+ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.4'
+
+gem "json", "1.8.0"
+gem "sinatra", "1.4.3"

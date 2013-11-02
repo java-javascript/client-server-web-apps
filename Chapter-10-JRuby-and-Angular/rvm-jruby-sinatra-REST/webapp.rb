@@ -11,7 +11,7 @@ $stocks = [
   ]
 
 get '/' do
-   redirect 'index.html'
+  Dir.entries('public').entries.map{|f|"<a href='#{f}'>#{f}</a><br/>" if f=~/.*\.html/}.join
 end
 
 get '/version' do
