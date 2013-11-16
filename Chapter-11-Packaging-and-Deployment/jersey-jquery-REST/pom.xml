@@ -80,7 +80,6 @@
 							<maxIdleTime>60000</maxIdleTime>
 						</connector>
 					</connectors>
-					<jetty-config>jetty.xml</jetty-config>
 				</configuration>
 			</plugin>
 		</plugins>
