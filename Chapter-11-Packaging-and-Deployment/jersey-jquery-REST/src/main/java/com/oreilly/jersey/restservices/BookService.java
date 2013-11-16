@@ -31,20 +31,11 @@ import org.apache.commons.lang.StringUtils;
  */
 public class BookService
 {
-	/**
-	 * TODO:  This example has no backend data store - just using an array
-	 */
-	
+
    public static Map<String, String> books = new TreeMap<String, String>();
 
-   /**
-    * TODO: Discuss GET, POST, PUT, DELETE methods and naming conventions for REST paths
-    */
    @Path("/{book}")
    @PUT
-   /**
-    * Discuss @Produces directive, @PathParam and @QueryParam
-    */
    @Produces("application/json")
    public String create(@PathParam("book") String book, @QueryParam("title") String title)
    {
@@ -75,14 +66,6 @@ public class BookService
       throw new WebApplicationException(Response.Status.NOT_FOUND);
    }
 
-
-
-   /**
-    * TODO Apache IO Utils, JSON Creation
-    * Mention Apache IO Utils, point out that String concatenation is not the best way
-    * to create JSON, but emphasizes the fact that it is a relatively simple data exchange
-    * format extracted from javascript
-    */
    @Path("/")
    @GET
    @Produces("application/json")
