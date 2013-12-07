@@ -10,6 +10,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
+import org.joda.time.DateTime;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Path ("/tonotdo")
 public class ToNotDoResource {
@@ -32,14 +37,23 @@ public class ToNotDoResource {
   @Produces ({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Consumes ({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   public Response helloJson(@Context SecurityContext sc, Item d) {
-
-	String str = "";
-
-	if (sc.getUserPrincipal() != null)
-		str=" ("+sc.getUserPrincipal().getName()+")";
-
-    d.setName(d.getName() + str);
+    storeData(sc.getUserPrincipal().getName(), d);
     return Response.status(200).entity(d).build();
   }
+
+// Persistence
+
+  private static HashMap<String, List<Item>> dataStore;
+
+  {
+    	dataStore = new HashMap();
+  }
+
+private storeData(String name, Item d)
+   if (!dataStore.containsKey(sc.getUserPrincipal().getName())){
+	 dataStore.put(name, new ArrayList<Item>()); 
+   }
+
+   if (dataStore.get(name).contains())	  
 
 }
