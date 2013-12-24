@@ -1,13 +1,3 @@
-/*
- * Copyright 2013-2013 Synchronoss Technologies, Inc.  All Rights Reserved.
- *
- * This source code is the confidential and proprietary information of
- * Synchronoss Technologies, Inc.
- *
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with Synchronoss Technologies.
- */
 package com.saternos.tonotdo;
 
 import org.apache.http.HttpEntity;
@@ -202,6 +192,19 @@ public class ToNotDoResourceTest {
                 findValue("externalKey").asText());
     }
 
+	@Test
+    public void testItemLastUpdated(){
+		String lastUpdated="01/02/2003 04:05:06";
+		Item i = new Item();
+		i.setLastUpdated(lastUpdated);
+		assertEquals(lastUpdated, i.getLastUpdated());
+	}
+	
+	/* TODO - add tests for other item fields */
+    // String description;
+    // Integer priority;
+    // String externalKey;
+
     /**
      * Utility method to delete an item
      *
@@ -214,5 +217,6 @@ public class ToNotDoResourceTest {
         HttpResponse response = client.execute(request);
         assertEquals(HttpStatus.SC_NO_CONTENT, response.getStatusLine().getStatusCode());
     }
+
 }
 

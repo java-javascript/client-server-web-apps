@@ -13,9 +13,18 @@ import java.util.concurrent.TimeUnit;
 
 
 public class SeleniumController {
+	
+	/**
+	 * There are a bunch of Drivers available, but which one(s) will work based varies based on Selenium 
+	 * version, browser version, OS etc.  Chrome requires some additional setup to use.  Safari on OSX
+	 * currently sees the login tests as a potential phishing attach and prompts the user to continue.
+	 * Recent versions of Firefox hang while loading.  Real world development tends to lack ease and 
+	 * elegance ;).
+	 */
+	
     //WebDriver driver = new HtmlUnitDriver();  
-    //WebDriver driver = new SafariDriver(); // Set security settings in Safari or Phishing notice for user/password in URL 
-    WebDriver driver = new FirefoxDriver();
+    WebDriver driver = new SafariDriver(); // Set security settings in Safari or Phishing notice for user/password in URL 
+    //WebDriver driver = new FirefoxDriver();
     // For ChromeDriver see https://code.google.com/p/selenium/wiki/ChromeDriver
 
     @Before
@@ -26,7 +35,6 @@ public class SeleniumController {
     public void destroySelenium() {
         driver.close();
         driver.quit();
-
     }
 
     public void clickAndWait(String selector) {
