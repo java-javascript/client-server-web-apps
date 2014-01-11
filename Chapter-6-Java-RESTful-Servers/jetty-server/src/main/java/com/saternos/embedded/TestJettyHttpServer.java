@@ -25,15 +25,13 @@ package com.saternos.embedded;
 
 import org.eclipse.jetty.server.Server;
 
-public class TestJettyHttpServer
-{
-      public static void main(String[] args) throws Exception
-      {
-			
-		  	Server server = new Server(Integer.parseInt(args[0]));
-			server.setHandler(new JsonHandler());
-		  	System.out.println("Starting server on port: " + args[0]);		  
-        	server.start();
-            server.join();
-      }
+public class TestJettyHttpServer {
+    public static void main(String[] args) throws Exception {
+
+        Server server = new Server(Integer.parseInt(args[0]));
+        server.setHandler(new JsonHandler());
+        System.out.println("Starting server on port: " + args[0]);
+        server.start();
+        server.join();
+    }
 }

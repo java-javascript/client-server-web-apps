@@ -1,9 +1,9 @@
 package com.saternos.embedded;
 
-import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.stream.ChunkedWriteHandler;
-import io.netty.handler.codec.http.*;
 import io.netty.channel.*;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.http.*;
+import io.netty.handler.stream.ChunkedWriteHandler;
 
 public class JsonServerInitializer extends ChannelInitializer<SocketChannel> {
 

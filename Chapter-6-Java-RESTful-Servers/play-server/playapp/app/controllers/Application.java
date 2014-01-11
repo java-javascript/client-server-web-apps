@@ -1,53 +1,48 @@
 package controllers;
 
+import org.codehaus.jackson.node.ArrayNode;
+import org.codehaus.jackson.node.ObjectNode;
 import play.*;
+import play.libs.Json;
 import play.mvc.*;
-
 import views.html.*;
 
-import org.codehaus.jackson.JsonNode;
-
-import play.libs.Json;
-import org.codehaus.jackson.node.ObjectNode;
-import org.codehaus.jackson.node.ArrayNode;
-
 // pretty print
-import org.codehaus.jackson.map.ObjectMapper;
 
 public class Application extends Controller {
-  
+
     public static Result index() {
         return ok(index.render("Your new application is ready."));
     }
-  
-	// How to return JSON:  Add a mapping to routes 
-	//   GET     /json                       controllers.Application.json()
-	// and a corresponding method
+
+    // How to return JSON:  Add a mapping to routes
+    //   GET     /json                       controllers.Application.json()
+    // and a corresponding method
     public static Result json() {
 
-	    ObjectNode result = Json.newObject();
-	
-		// How to nest a JSON object
-		ObjectNode child = Json.newObject();
-		child.put("color", "blue");
-		result.put("NestedObj",child);
+        ObjectNode result = Json.newObject();
 
-		//  Adding Strings
-		result.put("status", "OK");
-		result.put("something", "else");	
-		
-		// Add Integers
-		result.put("int", 1);
+        // How to nest a JSON object
+        ObjectNode child = Json.newObject();
+        child.put("color", "blue");
+        result.put("NestedObj", child);
 
-		// Add a JSON array
-	    ArrayNode collection = result.putArray("coll");
-		collection.add(1);
-		collection.add(2);
-		collection.add(3);				
-		collection.add(4);
-		
-		// http://www.playframework.com/documentation/api/1.2/play/mvc/results/Result.html
-		return ok(result);
+        //  Adding Strings
+        result.put("status", "OK");
+        result.put("something", "else");
+
+        // Add Integers
+        result.put("int", 1);
+
+        // Add a JSON array
+        ArrayNode collection = result.putArray("coll");
+        collection.add(1);
+        collection.add(2);
+        collection.add(3);
+        collection.add(4);
+
+        // http://www.playframework.com/documentation/api/1.2/play/mvc/results/Result.html
+        return ok(result);
 /*		
 // To return json pretty printed, need to render it as a formatted
 // String and then explicitly set the response
