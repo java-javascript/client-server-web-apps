@@ -192,14 +192,14 @@ public class ToNotDoResourceTest {
                 findValue("externalKey").asText());
     }
 
-	@Test
-    public void testItemLastUpdated(){
-		String lastUpdated="01/02/2003 04:05:06";
-		Item i = new Item();
-		i.setLastUpdated(lastUpdated);
-		assertEquals(lastUpdated, i.getLastUpdated());
-	}
-	
+    @Test
+    public void testItemLastUpdated() {
+        String lastUpdated = "01/02/2003 04:05:06";
+        Item i = new Item();
+        i.setLastUpdated(lastUpdated);
+        assertEquals(lastUpdated, i.getLastUpdated());
+    }
+
 	/* TODO - add tests for other item fields */
     // String description;
     // Integer priority;

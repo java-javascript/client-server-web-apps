@@ -6,22 +6,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
 
 public class SeleniumController {
-	
-	/**
-	 * There are a bunch of Drivers available, but which one(s) will work based varies based on Selenium 
-	 * version, browser version, OS etc.  Chrome requires some additional setup to use.  Safari on OSX
-	 * currently sees the login tests as a potential phishing attach and prompts the user to continue.
-	 * Recent versions of Firefox hang while loading.  Real world development tends to lack ease and 
-	 * elegance ;).
-	 */
-	
+
+    /**
+     * There are a bunch of Drivers available, but which one(s) will work based varies based on Selenium
+     * version, browser version, OS etc.  Chrome requires some additional setup to use.  Safari on OSX
+     * currently sees the login tests as a potential phishing attach and prompts the user to continue.
+     * Recent versions of Firefox hang while loading.  Real world development tends to lack ease and
+     * elegance ;).
+     */
+
     //WebDriver driver = new HtmlUnitDriver();  
     WebDriver driver = new SafariDriver(); // Set security settings in Safari or Phishing notice for user/password in URL 
     //WebDriver driver = new FirefoxDriver();
