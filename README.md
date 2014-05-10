@@ -14,4 +14,4 @@ design, structure and operation using various languages, libraries and framework
 are not full-fledged, bullet proof, enterprise grade applications.  These details are
 left as an exercise to the reader :).
 
-These are also very incomplete at the moment.  Just prefer code to be somewhere than on my local machine.
+O'Reilly Book Published April 2014 (woo hoo) available at Amazon: http://amzn.to/1eGJ0D6
