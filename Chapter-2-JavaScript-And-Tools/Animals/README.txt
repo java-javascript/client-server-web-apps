@@ -9,16 +9,16 @@
 # http://karma-runner.github.com
 # https://github.com/vojtajina/testacular/
 
-npm install testacular
+npm install karma -g
 
 # To see help
-testacular --help
+karma --help
 
 # Project configuration file was initially created using
-testacular init
+karma init
 
 # To run tests every time a file has changed
-testacular start
+karma start
 
 
 # Info on docco http://jashkenas.github.io/docco/
